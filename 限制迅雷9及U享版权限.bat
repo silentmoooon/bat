@@ -46,11 +46,12 @@ Cacls  "%FilePath%Program\SDK\DownloadSDKServer.exe" /E /R Administrators
 @For /r "%USERPROFILE%\AppData\Roaming\XLGameBox" %%i In (*.exe) Do  Cacls  "%%i" /E /D Everyone 
 @For /r "C:\Users\Public\Thunder Network" %%i In (*.exe) Do  Cacls  "%%i" /E /D Everyone 
 
-::停止XLServicePlatform、XLNXService服务以及XLGuard、XPWFP这2个隐藏的服务
+::停止XLServicePlatform、XLNXService、XMPService服务以及XLGuard、XPWFP这2个隐藏的服务
 net stop XLServicePlatform
 net stop XLNXService
 net stop XLGuard
 net stop XLWFP
+net stop XMPService
 
  ::解除迅雷自带的卸载WFP驱动进程的权限,并调用
 Cacls  "C:\Program Files (x86)\Thunder Network\Thunder9\UninstallXLWFP.exe" /E /d SYSTEM
@@ -58,11 +59,12 @@ Cacls  "C:\Program Files (x86)\Thunder Network\Thunder9\UninstallXLWFP.exe" /E /
 Cacls  "C:\Program Files (x86)\Thunder Network\Thunder9\UninstallXLWFP.exe" /E /R Everyone 
 "%FilePath%UninstallXLWFP.exe"
 
-::删除4个迅雷服务相关的注册表项
+::删除5个迅雷服务相关的注册表项
 REG DELETE  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XLWFP /f
 REG DELETE  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XLGuard /f
 REG DELETE  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XLNXService /f
 REG DELETE  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XLServicePlatform /f
+REG DELETE  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XMPService /f
 
 ::删除2个隐藏服务相关的文件并用空文件替代并禁用权限
 del /f C:\Windows\System32\drivers\XLGuard.sys
