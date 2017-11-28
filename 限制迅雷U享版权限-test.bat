@@ -55,6 +55,7 @@ Cacls  "%FilePath%Program\SDK\DownloadSDKServer.exe" /E /R Administrators
 
 
 
+
 ::对迅雷的其他文件夹进行全员拒绝
 @For /r "C:\Program Files (x86)\Common Files\Thunder Network" %%i In (*.exe) Do  Cacls  "%%i" /E /D Everyone 
 @For /r "%USERPROFILE%\AppData\Roaming\XLGameBox" %%i In (*.exe) Do  Cacls  "%%i" /E /D Everyone 
