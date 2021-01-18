@@ -7,9 +7,9 @@ rem 中间会弹出一个窗口,是用来卸载迅雷WFP驱动的,请点击unins
 ::通过注册表找到迅雷的安装目录
 for /f "tokens=1,2 delims=:" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\thunder_is1" /v "InstallLocation"') do (
     set "FilePathL=%%a"
-    set "FilePathR=%%b"
+     
 )
-set "FilePath=%FilePathL:~-1%:%FilePathR%"
+set "FilePath=%FilePathL%"
 
 ::对目录下的所有进程都进行全员拒绝
 @For /r "%FilePath%" %%i In (*.exe) Do  Cacls  "%%i" /E /D Everyone 
